@@ -4,30 +4,34 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private float speed = 5;
-    // Start is called before the first frame update
+    private SetBoundary bound;
     void Start()
     {
-        
+        bound = GameObject.Find("Boundary").GetComponent<SetBoundary>();
     }
 
     // Update is called once per frame
     void Update()
     {
         Movement();
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if(Physics.Raycast(ray,out hit))
-        {
-            var position = hit.collider.gameObject.GetComponent<GridManager>().cubePrefab.transform.position;
-            transform.position = position;
-        }
     }
     private void Movement()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-        transform.Translate(Vector3.right * speed * horizontalInput * Time.deltaTime);
-        transform.Translate(Vector3.forward * speed * verticalInput * Time.deltaTime);
+        if (Input.GetKeyDown(KeyCode.UpArrow) && bound.forwardMove==true)
+        {
+         transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 3);
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow) && bound.backwardMove == true)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z-3);
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow) && bound.rightMove==true)
+        {
+            transform.position = new Vector3(transform.position.x + 3, transform.position.y, transform.position.z);
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && bound.leftMove==true)
+        {
+            transform.position = new Vector3(transform.position.x-3, transform.position.y, transform.position.z);
+        }
     }
 }
