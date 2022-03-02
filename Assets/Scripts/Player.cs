@@ -14,7 +14,14 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Movement();  
+        Movement();
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if(Physics.Raycast(ray,out hit))
+        {
+            var position = hit.collider.gameObject.GetComponent<GridManager>().cubePrefab.transform.position;
+            transform.position = position;
+        }
     }
     private void Movement()
     {
