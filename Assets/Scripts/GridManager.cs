@@ -6,6 +6,8 @@ public class GridManager : MonoBehaviour
 {
     public int row;
     public int col;
+    private float horizantalspacing=0;
+    private float verticalspacing=0;
     public GameObject cubePrefab;
     // Start is called before the first frame update
     void Start()
@@ -24,10 +26,13 @@ public class GridManager : MonoBehaviour
         {
             for (int j = 0; j < col; j++)
             {
-                Vector3 Position = new Vector3(transform.position.x + row, transform.position.y,
-                transform.position.z + col);
+                Vector3 Position = new Vector3(transform.position.x + horizantalspacing, transform.position.y,
+                transform.position.z + verticalspacing);
                 Instantiate(cubePrefab, Position, cubePrefab.transform.rotation);
+                verticalspacing += 2;
             }
+            horizantalspacing += 2;
+            verticalspacing = 0;
         }
     }
 }
