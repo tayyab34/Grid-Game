@@ -29,9 +29,9 @@ public class GridManager : MonoBehaviour
                 Vector3 Position = new Vector3(transform.position.x + horizantalspacing, transform.position.y,
                 transform.position.z + verticalspacing);
                 Instantiate(cubePrefab, Position, cubePrefab.transform.rotation);
-                verticalspacing += 2;
+                verticalspacing += 3;
             }
-            horizantalspacing += 2;
+            horizantalspacing += 3;
             verticalspacing = 0;
         }
     }
